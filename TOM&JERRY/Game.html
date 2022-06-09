@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>packGame</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .wrap {
+            width: 100%;
+            height: 100vh;
+            background-color: #333;
+            overflow: hidden;
+            display: none;
+        }
+
+        .player {
+            width:80px;
+            height: 65px;
+           background-image: url(tom.png);
+            background-size: cover;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -25px;
+            margin-left: -25px;
+            z-index: 2;
+            transition: 0.1s;
+            transform: scaleX(-1);
+        }
+
+        .target {
+            width: 50px;
+            height: 50px;
+            background-image: url(jerry.png);
+            background-size: cover;
+            border-radius: 50%;
+            position: absolute;
+            margin-top: -25px;
+            margin-left: -25px;
+            z-index: 1;
+        }
+
+.loader{
+    width: 100%;
+    height: 100vh;
+    background-color: skyblue;
+    background-size: cover;
+    overflow: hidden;
+}
+.tom{
+width: 370px;
+height: 315px;
+transform: rotate(10deg);
+background-size: cover;
+background-image: url(tom.png);
+transform: scaleX(-1);
+transition: .1s;
+}
+.tjtxt{
+font-size: 50px;
+color: #fff;
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: 'Montserrat', sans-serif;
+user-select: none;
+}
+.jerry{
+    width: 265px;
+height: 265px;
+transform: rotate(-10deg);
+margin-top: 100px;
+background-size: cover;
+background-image: url(jerry.png);
+transition: .5s;
+}
+.tj{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 50%;
+    width: 100%;
+    padding-left: 200px;
+    position: relative;
+    right: 80px;
+    padding-right: 200px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    top: 100px;
+}
+.progress{
+    width: 250px;
+    height: 8px;
+    background-color: #FFD700;
+    margin-left: 40%;
+  border-radius: 3px;
+  margin-top: 150px;
+}
+.cheese1{
+    background-image: url(meat.png);
+    height: 50px;
+    width: 50px;
+    background-size: cover;
+    position: relative;
+    bottom: 500px;
+    left: 1300px;
+    transform: rotate(20deg);
+     transition: .5s;
+}
+.cheese2{
+    background-image: url(meat.png);
+    height: 50px;
+    width: 50px;
+    bottom: 300px;
+    left: 100px;
+    background-size: cover;
+    position: relative;
+    bottom: 400px;
+    left: 1200px;
+    transform: rotate(-10deg);
+     transition: .5s;
+}
+.cheese3{
+    background-image: url(meat.png);
+    height: 50px;
+    width: 50px;
+    background-size: cover;
+    position: relative;
+    bottom: 200px;
+    left: 1400px;
+    transition: .5s;
+}
+.meat1{
+    background-image: url(cheese.png);
+    height: 50px;
+    width: 50px;
+    background-size: cover;
+    position: relative;
+    bottom: 300px;
+    left: 90px;
+    transform: rotate(10deg);
+    transition: .5s;
+}
+.meat2{
+    background-image: url(cheese.png);
+    height: 50px;
+    width: 50px;
+    background-size: cover;
+    position: relative;
+    bottom: 700px;
+    left: 200px;
+    transform: rotate(110deg);
+    transition: .5s;
+}
+.meat3{
+    background-image: url(cheese.png);
+    height: 50px;
+    width: 50px;
+    background-size: cover;
+    position: relative;
+    bottom: 600px;
+    left: 350px;
+     transform: rotate(10deg);
+     transition: .5s;
+}
+.meat4{
+    background-image: url(cheese.png);
+    height: 50px;
+    width: 50px;
+    background-size: cover;
+    position: relative;
+    bottom: 700px;
+    left: 510px;
+     transform: rotate(90deg);
+     transition: .5s;
+}
+.perc{
+    width: 0%;
+    height: 100%;
+    background-color: rgb(100, 157, 180);
+    border-radius: 3px;
+transition: 1s;
+}
+
+.films{
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: skyblue;
+    transition: 1s;
+    display: none;
+}
+.start{
+    width: 85%;
+    height: 75%;
+    border-radius: 5px;
+    background-size: cover;
+    background-image: url(p0.png);
+    position: relative;
+    left: 4%;
+    border: #fff solid 2px;
+}
+.txtskip{
+    position: relative;
+    top: 41%;
+    right: 6%;
+    color: white;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 50px;
+    user-select: none;
+    font-weight: 400;
+}
+.play{
+    background-image: url(bluemoon.png);
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    display: none;
+}
+.stand{
+    width: 200px;
+    height: 70px;
+    background-color: skyblue;
+    border-radius: 50%;
+}
+.toppage{
+    height: 60%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.toms{
+    width: 290px;
+    height: 250px;
+    background-image: url(tom.png);
+    background-size: cover;
+    position: absolute;
+    left: 580px;
+    bottom: 330px;
+}
+.jerrys{
+    width: 300px;
+    height: 220px;
+    background-image: url(dog.png);
+    background-size: cover;
+    position: absolute;
+right: 1100px;
+bottom: 250px;
+}
+.box1{
+    width: 95px;
+    height: 95px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgb(0, 145, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 14%;
+}
+.box2{
+    width: 95px;
+    height: 95px;
+    border-radius: 10px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 10px rgb(0, 145, 255);
+}
+.box3{
+    width: 95px;
+    height: 95px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgb(0, 145, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10%;
+}
+.bottompage{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 40%;
+    width: 100%;
+    padding: 50px;
+}
+.pl{
+    background-image: url(play.png);
+    height: 80%;
+    width: 80%;
+    background-size: cover;
+    cursor: pointer;
+}
+.sl{
+    background-image: url(settings.png);
+    height: 80%;
+    width: 80%;
+    cursor: pointer;
+    background-size: cover;
+}
+.kl{
+    background-image: url(trophy.png);
+    height: 80%;
+    width: 80%;
+    background-size: cover;
+    cursor: pointer;
+}
+.set{
+    width: 175px;
+    height: 75px;
+    background-color: aliceblue;
+    border-radius: 10px;
+    justify-content: space-around;
+    align-items: center;
+    display: none;
+}
+.sound{
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    background-image: url(sound.png);
+    background-size: cover;
+}
+.speed{
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    background-image: url(easy.png);
+    background-size: cover;
+}
+.achi{
+    width: 175px;
+    height: 275px;
+    background-color: aliceblue;
+    border-radius: 10px;
+    justify-content: space-around;
+    align-items: center;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.pa1{
+    width: 100%;
+    height: 33.3%;
+    background-color: #FFD700;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    user-select: none;
+    padding: 10px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+.pa2{
+    width: 100%;
+    height: 33.3%;
+    background-color: #FFD700;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    user-select: none;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+.pa3{
+    width: 100%;
+    height: 33.3%;
+    background-color: #FFD700;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+       display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    user-select: none;
+    padding: 10px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+.pastka1{
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-image: url(hatch.png);
+    position: absolute;
+}
+.pastka2{
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-image: url(hatch.png);
+    position: absolute;
+}
+.pastka3{
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-image: url(hatch.png);
+    position: absolute;
+}
+.score{
+    width: 200px;
+    height: 90px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-left: 43%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #333;
+    font-size: 30px;
+}
+.meat1s{
+    position: relative;
+top: 2px;
+left: -35px;
+    width: 50px;
+    height: 50px;
+    background-image: url(meat.png);
+    background-size: cover;
+}
+.cont1{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+width: 300px;
+}
+.cont2{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+}
+    </style>
+</head>
+
+<body>
+
+<div class="loader" id="loader">
+<div class="tj">
+    <div class="tom" id="tom"></div>
+    <div class="tjtxt" id="tjtxt" >WAITING</div>
+    <div class="jerry" id="jerry"></div>
+</div>
+<div class="bottompart">
+    <div class="progress"> <div class="perc" id="perc"></div> </div>
+    <div class="cheese1" id="c1"></div>
+<div class="cheese2" id="c2"></div>
+<div class="cheese3" id="c3"></div>
+<div class="meat1" id="m1"></div>
+<div class="meat2" id="m2"></div>
+<div class="meat3" id="m3"></div>
+<div class="meat4" id="m4"></div>
+</div>
+</div>
+
+
+<div class="films" id="films">
+<div class="start" id="start"></div>
+<div class="txtskip" id="txtskip">RECENTLY</div>
+</div>
+
+
+
+<div class="play" id="press">
+    <div class="toppage">
+        <div class="jerrys"></div>
+<div class="stand"></div>
+<div class="toms"></div>
+</div>
+
+<div class="bottompage">
+
+<div class="cont1">
+    <div class="set" id="set"><div class="sound" id="sound"></div><div class="speed"></div></div>
+    <div class="box1" id="box1"><div class="sl"></div></div>
+</div>
+    <div class="box2" id="box2"><div class="pl"></div></div>
+
+
+<div class="cont2">
+    <div class="achi" id="achi">
+        <div class="pa1">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div> 
+        <div class="pa2">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+        <div class="pa3">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>  
+        </div>
+    <div class="box3" id="box3"><div class="kl"></div></div>
+</div>
+</div>
+
+
+</div>
+
+
+
+    <div class="wrap" id="wrap">
+        <div class="score"><div class="meat1s"></div><div class="scr" id="scr">0</div></div>
+        <div class="player" id="player"></div>
+        <div class="target" id="target"></div>
+        <div class="pastka1" id="pastka1"></div>
+        <div class="pastka2" id="pastka2"></div>
+        <div class="pastka3" id="pastka3"></div>
+    </div>
+    <script>
+
+
+
+
+
+
+let loadtime = 0;
+
+let load = setInterval(()=>{
+    loadtime++
+    if(loadtime==1){
+        
+        tjtxt.innerHTML = '  WHEN THE  '
+
+        perc.style.width = '15%'
+        c1.style.bottom= '400px'
+        c1.style.left= '1350px'
+        c1.style.transform= 'rotate(50deg)'
+
+        c2.style.bottom= '300px'
+        c2.style.left= '1150px'
+        c2.style.transform= 'rotate(-50deg)'
+
+        c3.style.bottom= '150px'
+        c3.style.left= '1400px'
+        c3.style.transform= 'rotate(40deg)'
+
+        m1.style.bottom= '200px'
+        m1.style.left= '80px'
+        m1.style.transform= 'rotate(-50deg)'
+
+        m2.style.bottom= '500px'
+        m2.style.left= '350px'
+        m2.style.transform= 'rotate(10deg)'
+
+        m3.style.bottom= '500px'
+        m3.style.left= '100px'
+        m3.style.transform= 'rotate(10deg)'
+
+        m4.style.bottom= '425px'
+        m4.style.left= '150px'
+        m4.style.transform= 'rotate(10deg)'
+    }else     if(loadtime==2){
+
+
+
+        tjtxt.innerHTML = 'LOADING'
+        perc.style.width = '45%'
+        c1.style.bottom= '300px'
+        c1.style.left= '1250px'
+        c1.style.transform= 'rotate(60deg)'
+
+        c2.style.bottom= '220px'
+        c2.style.left= '1190px'
+        c2.style.transform= 'rotate(-55deg)'
+
+        c3.style.bottom= '110px'
+        c3.style.left= '1200px'
+        c3.style.transform= 'rotate(20deg)'
+
+        m1.style.bottom= '200px'
+        m1.style.left= '80px'
+        m1.style.transform= 'rotate(-50deg)'
+
+        m2.style.bottom= '400px'
+        m2.style.left= '400px'
+        m2.style.transform= 'rotate(15deg)'
+
+        m3.style.bottom= '360px'
+        m3.style.left= '175px'
+        m3.style.transform= 'rotate(25deg)'
+
+        m4.style.bottom= '325px'
+        m4.style.left= '200px'
+        m4.style.transform= 'rotate(50deg)'
+    }else     if(loadtime==3){
+        tjtxt.innerHTML = 'FINISHED'
+
+        perc.style.width = '75%'
+        c1.style.bottom= '100px'
+        c1.style.left= '1200px'
+        c1.style.transform= 'rotate(50deg)'
+
+        c2.style.bottom= '120px'
+        c2.style.left= '1000px'
+        c2.style.transform= 'rotate(-75deg)'
+
+        c3.style.bottom= '70px'
+        c3.style.left= '1250px'
+        c3.style.transform= 'rotate(26deg)'
+
+        m1.style.bottom= '100px'
+        m1.style.left= '90px'
+        m1.style.transform= 'rotate(-45deg)'
+
+        m2.style.bottom= '400px'
+        m2.style.left= '40px'
+        m2.style.transform= 'rotate(15deg)'
+
+        m3.style.bottom= '160px'
+        m3.style.left= '135px'
+        m3.style.transform= 'rotate(15deg)'
+
+        m4.style.bottom= '225px'
+        m4.style.left= '255px'
+        m4.style.transform= 'rotate(30deg)'
+    }else     if(loadtime==4){
+        tjtxt.innerHTML = 'WAITING'
+        perc.style.width = '100%'
+        c1.style.bottom= '-250px'
+        c1.style.left= '1000px'
+        c1.style.transform= 'rotate(30deg)'
+
+        c2.style.bottom= '-220px'
+        c2.style.left= '1400px'
+        c2.style.transform= 'rotate(-45deg)'
+
+        c3.style.bottom= '-200px'
+        c3.style.left= '1050px'
+        c3.style.transform= 'rotate(20deg)'
+
+        m1.style.bottom= '-100px'
+        m1.style.left= '190px'
+        m1.style.transform= 'rotate(-25deg)'
+
+        m2.style.bottom= '-100px'
+        m2.style.left= '70px'
+        m2.style.transform= 'rotate(5deg)'
+
+        m3.style.bottom= '-100px'
+        m3.style.left= '135px'
+        m3.style.transform= 'rotate(15deg)'
+
+        m4.style.bottom= '-100px'
+        m4.style.left= '295px'
+        m4.style.transform= 'rotate(40deg)'
+    }else     if(loadtime==5){
+loader.style.display = 'none'
+films.style.display = 'flex'
+clearInterval(load)
+    }
+},1000)
+
+
+let filmtime = 0
+let film = setInterval(()=>{
+    filmtime++
+    if(filmtime==6){
+start.style.backgroundImage = 'url(1p.png)'
+    }else if(filmtime==7){
+start.style.backgroundImage = 'url(2p.png)'
+    }else if(filmtime==8){
+start.style.backgroundImage = 'url(3p.png)'
+    }else if(filmtime==9){
+start.style.backgroundImage = 'url(4p.png)'
+    }else if(filmtime==10){
+start.style.backgroundImage = 'url(5p.png)'
+    }else if(filmtime==11){
+start.style.backgroundImage = 'url(6p.png)'
+    }
+    else if(filmtime==12){
+        films.style.display = 'none'
+        press.style.display = 'block'
+        clearInterval(film)
+    }
+    
+},1000)
+
+box2.onclick = ()=>{
+    press.style.display = 'none'
+    wrap.style.display = 'flex'
+}
+
+let se = 0
+box1.onclick = ()=>{
+    if(se==0){
+        set.style.display = 'flex'
+        se=1
+    }
+    else  if(se==1){
+        set.style.display = 'none'
+        se=0
+    }
+}
+let so = 0
+sound.onclick = ()=>{
+    if(so==0){
+        sound.style.backgroundImage = 'url(no-sound.png)'
+        so=1
+    }
+    else  if(so==1){
+        sound.style.backgroundImage = 'url(sound.png)'
+        so=0
+    }
+}
+
+let ao = 0
+box3.onclick = ()=>{
+    if(se==0){
+        achi.style.display = 'flex'
+        se=1
+    }
+    else  if(se==1){
+        achi.style.display = 'none'
+        se=0
+    }
+}
+
+        let topPos = 50;
+        let leftPos = 50;
+        let t;
+        let b;
+        let r;
+        let l;
+        let targetTop;
+        let targetLeft;
+        let playerDeg = 0;
+let pastka1Top
+let pastka1Left
+let pastka2Top
+let pastka2Left
+let pastka3Top
+let pastka3Left
+        function setTarget() {
+            targetTop = Math.floor(Math.random() * 90);
+            targetLeft = Math.floor(Math.random() * 90);
+
+            pastka1Top = Math.floor(Math.random() * 90);
+            pastka1Left = Math.floor(Math.random() * 90);
+
+            pastka2Top = Math.floor(Math.random() * 90);
+            pastka2Left = Math.floor(Math.random() * 90);
+
+            pastka3Top = Math.floor(Math.random() * 90);
+            pastka3Left = Math.floor(Math.random() * 90);
+            
+            target.style.top = targetTop + '%';
+            target.style.left = targetLeft + '%';
+            pastka1.style.top = pastka1Top + '%';
+pastka1.style.left = pastka1Left + '%';
+pastka2.style.top = pastka2Top + '%';
+ pastka2.style.left = pastka2Left + '%';
+pastka3.style.top = pastka3Top + '%';
+ pastka3.style.left = pastka3Left + '%';
+ checkWinner();
+        }
+        setTarget();
+
+
+        document.body.onkeydown = function(e) {
+            console.log(e.keyCode);
+            if (e.keyCode == 39) {
+                clearTimer();
+                r = setInterval(function() {
+                    playerDeg = 0;
+                    player.style.transform = 'rotate('+playerDeg+'deg)';
+                    player.style.transform = 'scaleX(-1)';
+                    leftPos++;
+                    checkWinner();
+                    player.style.left = leftPos + '%';
+
+                }, 100)
+            } else if (e.keyCode == 37) {
+                clearTimer();
+                l = setInterval(function() {
+                    playerDeg = 180;
+                     player.style.transform = 'rotate('+playerDeg+'deg)';
+                     player.style.transform = 'scaleX(1)';
+                    leftPos--;
+                    checkWinner();
+                    player.style.left = leftPos + '%';
+                }, 100)
+            } else if (e.keyCode == 40) {
+                clearTimer();
+                b = setInterval(function() {
+                    playerDeg = 90;
+                     player.style.transform = 'rotate('+playerDeg+'deg)';
+                     player.style.transform = 'scaleY(-1)';
+                    topPos++;
+                    checkWinner();
+                    player.style.top = topPos + '%';
+                }, 50)
+            } else if (e.keyCode == 38) {
+                clearTimer();
+                t = setInterval(function() {
+                    playerDeg = 270;
+                     player.style.transform = 'rotate('+playerDeg+'deg)';
+                     player.style.transform = 'scaleY(1)';
+                    topPos--;
+                    checkWinner();
+                    player.style.top = topPos + '%';
+                }, 50)
+            }
+        }
+
+        function clearTimer() {
+            clearInterval(l);
+            clearInterval(r);
+            clearInterval(t);
+            clearInterval(b);
+        }
+let points = 0
+        function checkWinner() {
+            if (targetLeft == leftPos && targetTop == topPos) {
+                points ++
+                console.log(points)
+                setTarget();
+                scr.innerHTML = points
+                topPos = 50;
+         leftPos = 50;
+         player.style.top = topPos + '%';
+            player.style.left = leftPos + '%';
+            }else if(pastka1Left == leftPos && pastka1Top == topPos){
+            alert('lose')
+            scr.innerHTML = '0'
+            points = 0
+            setTarget();
+            wrap.style.display = 'none'
+            press.style.display = 'block'
+            topPos = 50;
+         leftPos = 50;
+         player.style.top = topPos + '%';
+            player.style.left = leftPos + '%';
+         clearTimer()
+        }else if(pastka2Left == leftPos && pastka2Top == topPos){
+            alert('lose')
+            points = 0
+            scr.innerHTML = '0'
+            setTarget();
+            wrap.style.display = 'none'
+            topPos = 50;
+         leftPos = 50;
+         player.style.top = topPos + '%';
+            player.style.left = leftPos + '%';
+            press.style.display = 'block'
+            clearTimer()
+        }else if(pastka3Left == leftPos && pastka3Top == topPos){
+            alert('lose')
+            points = 0
+            scr.innerHTML = '0'
+            setTarget();
+            wrap.style.display = 'none'
+            press.style.display = 'block'
+            player.style.top = topPos + '%';
+            player.style.left = leftPos + '%';
+ topPos = 50;
+         leftPos = 50;
+         clearTimer()
+        }
+        }
+
+        
+    </script>
+</body></html>
